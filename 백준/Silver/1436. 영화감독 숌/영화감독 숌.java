@@ -1,28 +1,26 @@
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
+class Main {
+    public static void main(String[] args) throws Exception {
 
-public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int num = scanner.nextInt();
+        int N = Integer.parseInt(br.readLine());
+
         int count = 0;
 
-        for(int i = 666; ; i++) {
+        for (int i = 666; ; i++) {
 
-
-            if(count == num) {
+            if (count == N) {
                 System.out.println(i - 1);
-                break;
+                return;
             }
 
-            String change = String.valueOf(i);
-
-            if(change.contains("666"))
+            if (String.valueOf(i).contains("666"))
                 count++;
         }
-
-
     }
 
 }
