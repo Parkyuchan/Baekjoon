@@ -1,30 +1,34 @@
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
+class Main {
+    public static void main(String[] args) throws Exception {
 
-public class Main {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        int N = Integer.parseInt(br.readLine());
+        int result = 0;
 
-        int num = scanner.nextInt();
-        int con = 0;
+        int digits = String.valueOf(N).length();
+        int start = N - (digits * 9);
+        if (start < 1) start = 1;
 
-        for(int i = num - 9 * String.valueOf(num).length(); i<num; i++) {
+        for (int i = start; i < N; i++) {
             int sum = i;
-            int temp = i;
+            int x = i;
 
-            while(temp != 0) {
-                sum += temp % 10;
-                temp /= 10;
+            while(x > 0) {
+                sum += x % 10;
+                x /= 10;
             }
 
-            if(sum == num) {
-                con = i;
+            if (sum == N) {
+                result = i;
                 break;
             }
         }
 
-        System.out.println(con);
+        System.out.println(result);
     }
 
 }
