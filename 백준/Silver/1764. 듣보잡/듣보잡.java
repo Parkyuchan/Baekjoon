@@ -1,39 +1,41 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.*;
 
-public class Main {
+class Main {
 
     public static void main(String[] args) throws IOException {
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuffer sb = new StringBuffer();
-        String[] line = br.readLine().split(" ");
+       BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+       StringBuilder sb = new StringBuilder();
+       StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int N = Integer.parseInt(line[0]);
-        int M = Integer.parseInt(line[1]);
+       int N = Integer.parseInt(st.nextToken());
+       int M = Integer.parseInt(st.nextToken());
 
-        Map<String, Integer> map = new HashMap<>(N);
+       Set<String> set = new HashSet<>();
+       Set<String> result = new HashSet<>();
 
-        for(int i = 0; i<N; i++)
-            map.put(br.readLine(), 0);
+       for (int i = 0; i < N; i++) {
+           set.add(br.readLine());
+       }
 
-        List<String> list = new ArrayList<>();
+       for (int i = 0; i < M; i++) {
+           String input = br.readLine();
+           if (set.contains(input)) {
+               result.add(input);
+           }
+       }
 
-        for(int i = 0; i<M; i++) {
-            String str = br.readLine();
-            if(map.containsKey(str))
-                list.add(str);
-        }
+       String[] answer = result.toArray(new String[0]);
+       Arrays.sort(answer);
+       sb.append(answer.length).append("\n");
 
-        Collections.sort(list);
+       for (int i = 0; i < answer.length; i++) {
+           sb.append(answer[i]).append("\n");
+       }
 
-        sb.append(list.size()).append("\n");
+       System.out.println(sb);
 
-        for(int i = 0; i<list.size(); i++)
-            sb.append(list.get(i)).append("\n");
-
-        System.out.println(sb);
     }
+
 }
