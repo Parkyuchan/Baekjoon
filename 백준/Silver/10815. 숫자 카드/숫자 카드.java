@@ -1,36 +1,37 @@
 import java.io.*;
 import java.util.*;
 
-
-public class Main {
+class Main {
 
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
 
-        int N = Integer.parseInt(br.readLine());
+       BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+       StringBuilder sb = new StringBuilder();
 
-        String[] num = br.readLine().split(" ");
-        Set<Integer> first_set = new HashSet<>(N);
+       int N = Integer.parseInt(br.readLine());
+       Map<Integer, Integer> keep = new HashMap<>();
+       StringTokenizer st = new StringTokenizer(br.readLine());
 
-        for(int i = 0; i<N; i++)
-            first_set.add(Integer.parseInt(num[i]));
+       for (int i = 0; i < N; i++) {
+           int num = Integer.parseInt(st.nextToken());
+           if (!keep.containsKey(num))
+               keep.put(num, 1);
+       }
 
-        int M = Integer.parseInt(br.readLine());
+       int M = Integer.parseInt(br.readLine());
+       st = new StringTokenizer(br.readLine());
 
-        String[] eq = br.readLine().split(" ");
-        List<Integer> list_second = new ArrayList<>(M);
+       for (int i = 0; i < M; i++) {
+           int num = Integer.parseInt(st.nextToken());
 
-        for(int i = 0; i<M; i++) {
-            list_second.add(Integer.parseInt(eq[i]));
-            if (first_set.contains(list_second.get(i)))
-                sb.append(1).append(" ");
-            else
-                sb.append(0).append(" ");
-
-        }
+           if (keep.containsKey(num))
+               sb.append(1 + " ");
+           else
+               sb.append(0 + " ");
+       }
 
         System.out.println(sb);
+
     }
 
 }
