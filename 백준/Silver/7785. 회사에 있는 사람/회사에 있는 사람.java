@@ -1,33 +1,33 @@
 import java.io.*;
 import java.util.*;
 
-
-public class Main {
+class Main {
 
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
 
-        int N = Integer.parseInt(br.readLine());
-        Set<String> set = new HashSet<>();
+       BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+       StringBuilder sb = new StringBuilder();
 
-        for(int i = 0; i<N; i++) {
-            String[] log = br.readLine().split(" ");
+       int N = Integer.parseInt(br.readLine());
+       Set<String> set = new HashSet<>();
 
-            String name = log[0];
-            String now = log[1];
+       for (int i = 0; i < N; i++) {
+           String[] input = br.readLine().split(" ");
 
-            if(now.equals("enter"))
-                set.add(name);
-            else
-                set.remove(name);
-        }
+           if (input[1].equals("enter"))
+               set.add(input[0]);
+           else
+               set.remove(input[0]);
+       }
 
-        List<String> result = new ArrayList<>(set);
-        Collections.sort(result, Collections.reverseOrder());
+       String[] enter = set.toArray(new String[0]);
+       Arrays.sort(enter);
 
-        for(String name : result)
-            System.out.println(name);
+       for (int i = enter.length - 1; i >= 0; i--)
+           sb.append(enter[i]).append("\n");
+
+        System.out.println(sb);
+
     }
 
 }
