@@ -1,38 +1,52 @@
+import java.io.*;
 import java.util.*;
 
+class Main {
 
-public class Main {
+    public static void main(String[] args) throws IOException {
 
+       BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+       int M = Integer.parseInt(br.readLine());
+       int N = Integer.parseInt(br.readLine());
 
-        int start = scanner.nextInt();
-        int end = scanner.nextInt();
-        int sum = 0;
-        int min = -1;
+       int result = 0;
+       int min = 0;
 
-        for(int i = start; i<=end; i++) {
-            boolean flag = true;
-            if(i < 2)
-                continue;
-                
-            for(int j = 2; j<=(int)Math.sqrt(i); j++) {
-                if(i % j == 0) {
-                    flag = false;
-                    break;
-                }
-            }
+       for (int i = M; i <= N; i++) {
 
-            if(flag) {
-                if(sum == 0)
-                    min = i;
-                sum += i;
-            }
-        }
+           if (i == 2) {
+               result += i;
+               min = i;
+               continue;
+           }
+           if (i % 2 == 0 || i < 2)
+               continue;
 
-        if(sum != 0)
-            System.out.println(sum);
-        System.out.println(min);
+           boolean check = false;
+
+           for (int j = 3; j * j <= i; j+=2) {
+               if (i % j == 0) {
+                   check = true;
+                   break;
+               }
+           }
+
+           if (!check) {
+               if (result == 0)
+                   min = i;
+
+               result += i;
+           }
+       }
+
+       result = result != 0 ? result : -1;
+
+       System.out.println(result);
+       if (min != 0) {
+           System.out.println(min);
+
+       }
     }
+
 }
