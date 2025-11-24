@@ -2,14 +2,19 @@ import java.util.*;
 class Solution {
     public String solution(String s) {
         String[] str = s.split(" ");
-        int[] num = new int[str.length];
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
         
         for (int i = 0; i < str.length; i++) {
-            num[i] = Integer.parseInt(str[i]);
+            int now = Integer.parseInt(str[i]);
+            
+            if (min > now)
+                min = now;
+            if (max < now)
+                max = now;
         }
 
-        Arrays.sort(num);
-        return String.valueOf(num[0]) + " " + String.valueOf(num[num.length - 1]);
+        return min + " " + max;
 
     }
 }
