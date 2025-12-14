@@ -2,18 +2,15 @@ import java.util.*;
 class Solution {
     public String solution(String s) {
         String[] str = s.split(" ");
-        int min = Integer.MAX_VALUE;
-        int max = Integer.MIN_VALUE;
+        int[] num = new int[str.length];
         
         for (int i = 0; i < str.length; i++) {
-            int now = Integer.parseInt(str[i]);
-            
-            if (min > now)
-                min = now;
-            if (max < now)
-                max = now;
+            num[i] = Integer.parseInt(str[i]);
         }
-
+        
+        int min = Arrays.stream(num).min().getAsInt();
+        int max = Arrays.stream(num).max().getAsInt();
+        
         return min + " " + max;
 
     }
