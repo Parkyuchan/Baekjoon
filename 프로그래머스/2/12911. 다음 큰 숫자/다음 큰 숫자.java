@@ -1,18 +1,15 @@
 class Solution {
     public int solution(int n) {
         int answer = n;
-        String binary_before = Integer.toBinaryString(n);
-        binary_before = binary_before.replace("0", "");
-        int len_before = binary_before.length();
-
+        int len = Integer.bitCount(n);
+        
         while(true) {
-            String binary_after = Integer.toBinaryString(++answer);
-            binary_after = binary_after.replace("0", "");
-
-            if (binary_after.length() == len_before)
+            int nextLen = Integer.bitCount(++answer);
+            
+            if (len == nextLen)
                 break;
         }
-        
         return answer;
     }
+
 }
