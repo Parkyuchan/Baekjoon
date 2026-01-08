@@ -5,15 +5,14 @@ class Solution {
     public int[] solution(int brown, int yellow) {
         int[] answer = new int[2];
 
-        int total = brown + yellow;
-
-        for (int height = 3; height <= total; height++) {
-            if (total % height == 0) {
-                int width = total / height;
-
-                if ((width - 2) * (height - 2) == yellow) {
-                    answer[0] = Math.max(width, height);
-                    answer[1] = Math.min(width, height);
+        for (int i = yellow; i >= 1; i--) {
+            if (yellow % i == 0) {
+                System.out.println(i);
+                int sum = (i + 2) * 2 + (yellow / i) * 2;
+                if (sum == brown) {
+                    answer[0] = i + 2;
+                    answer[1] = yellow / i + 2;
+                    break;
                 }
             }
         }
