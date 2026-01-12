@@ -4,12 +4,13 @@ class Solution
     {
         int answer = 1;
         
-        while(!((a + 1) / 2 == (b + 1) / 2)) {
-            n /= 2;
+        while(true) {
             a = (a + 1) / 2;
             b = (b + 1) / 2;
+            if (a == b) {
+                break;
+            }
             answer++;
-
         }
 
         return answer;
