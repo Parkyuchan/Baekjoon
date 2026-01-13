@@ -4,52 +4,32 @@ import java.util.stream.Collectors;
 class Solution {
     public int solution(String[] want, int[] number, String[] discount) {
         int answer = 0;
-        int size = 0;
-        Map<String, Integer> map = new LinkedHashMap<>();
-
-        for (int i = 0; i<number.length; i++) {
-            size += number[i];
+        
+        Map<String, Integer> map = new HashMap<>();
+        for (int i = 0; i < want.length; i++) {
+            map.put(want[i], number[i]);
         }
+        
+        for (int i = 0; i < discount.length - 9; i++) {
+            Map<String, Integer> copy = new HashMap<>(map);
+            boolean numCheck = true;
 
-        for (int i = 0; i<size; i++) {
-            map.put(discount[i], map.getOrDefault(discount[i], 0) + 1);
-        }
-
-        int count = 0;
-
-        while(count + size <= discount.length) {
-            Map<String, Integer> mapCheck = map.entrySet()
-                    .stream()
-                    .collect(Collectors.toMap(
-                            Map.Entry::getKey,
-                            Map.Entry::getValue,
-                            (e1, e2) -> e1,
-                            LinkedHashMap::new
-                    ));
-
-            int i;
-
-            boolean check = true;
-            for (i = 0; i<want.length; i++) {
-                if (!(mapCheck.containsKey(want[i])) || mapCheck.get(want[i]) < number[i]) {
-                    check = false;
+            for (int j = i; j < i + 10; j++) {
+                if (copy.containsKey(discount[j]) && copy.get(discount[j]) > 0) {
+                    copy.put(discount[j], copy.get(discount[j]) - 1);
+                } else {
+                    numCheck = false;
                     break;
                 }
-                mapCheck.put(want[i], mapCheck.get(want[i]) - number[i]);
             }
-            if (check)
-                answer++;
-
-            if (count + size == discount.length)
-                break;
-
-            map.put(discount[count], map.get(discount[count]) - 1);
-            if (map.get(discount[count]) == 0)
-                map.remove(discount[count]);
-
-            map.put(discount[count + size], map.getOrDefault(discount[count + size], 0) + 1);
-            count++;
+            
+            if (!numCheck)
+                continue;
+            
+            answer++;
+            
         }
+        
         return answer;
     }
 }
