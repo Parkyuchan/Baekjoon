@@ -4,21 +4,12 @@ class Solution {
     public int solution(int[] citations) {
         int answer = 0;
         Arrays.sort(citations);
-
-        int max = 0;
-        int count = 1;
-        int idx = 0;
-        while (count <= citations[citations.length - 1]) {
-            if (citations[idx] >= count) {
-                if (max < citations.length - idx)
-                    max = count;
-                count++;
-                continue;
-            }
-
-            idx++;
+        
+        for (int i = 0; i < citations.length; i++) {
+            int h = Math.min(citations.length - i, citations[i]);
+            answer = Math.max(h, answer);
+            
         }
-        answer = max;
         return answer;
     }
 }
