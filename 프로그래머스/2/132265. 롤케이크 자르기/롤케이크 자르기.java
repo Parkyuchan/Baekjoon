@@ -3,28 +3,26 @@ import java.util.*;
 class Solution {
     public int solution(int[] topping) {
         int answer = 0;
+        Map<Integer, Integer> map1 = new HashMap<>();
+        Map<Integer, Integer> map2 = new HashMap<>();
         
-        Map<Integer, Integer> mapFirst = new LinkedHashMap<>();
-        Map<Integer, Integer> mapSecond = new LinkedHashMap<>();
-
-        for (int i = 0; i<topping.length; i++)
-            mapSecond.put(topping[i], mapSecond.getOrDefault(topping[i], 0) + 1);
-
-        for (int i = 0; i<topping.length; i++) {
-            mapFirst.put(topping[i], mapFirst.getOrDefault(topping[i], 0) + 1);
-
-            if (mapSecond.containsKey(topping[i])) {
-                if (mapSecond.get(topping[i]) == 1)
-                    mapSecond.remove(topping[i]);
-                else
-                    mapSecond.put(topping[i], mapSecond.get(topping[i]) - 1);
+        for (int i = 0; i < topping.length; i++)
+            map2.put(topping[i], map2.getOrDefault(topping[i], 0) + 1);
+        
+        for (int i = 0; i < topping.length; i++) {
+            for (int j = i; j < i + 1; j++) {
+                map1.put(topping[j], map1.getOrDefault(topping[i], 0) + 1);
+                
+                if (map2.containsKey(topping[j])) {
+                    if (map2.get(topping[j]) == 1)
+                    map2.remove(topping[j]);
+                else if (map2.get(topping[j]) > 1)
+                    map2.put(topping[j], map2.get(topping[j]) - 1);
+                }
             }
-
-            if (mapFirst.size() == mapSecond.size())
+            if (map1.size() == map2.size())
                 answer++;
         }
-
-
         return answer;
     }
 }
