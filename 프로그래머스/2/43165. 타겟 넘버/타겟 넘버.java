@@ -2,24 +2,20 @@ class Solution {
     static int result = 0;
 
     public int solution(int[] numbers, int target) {
-        int answer = 0;
         
-        dfs(0, numbers, target, 0);
-        answer = result;
-        
-        return answer;
+        dfs(numbers, target, 0, 0);
+        return result;
     }
     
-    public static void dfs(int idx, int[] numbers, int target, int sum) {
-
+    private void dfs(int[] numbers, int target, int idx, int sum) {
         if (idx == numbers.length) {
-            if (target == sum)
+            if (sum == target)
                 result++;
             return;
         }
-
-        dfs(idx + 1, numbers, target, sum + numbers[idx]);
-        dfs(idx + 1, numbers, target, sum - numbers[idx]);
+        
+        dfs(numbers, target, idx + 1, sum + numbers[idx]);
+        dfs(numbers, target, idx + 1, sum - numbers[idx]);
     }
 
 }
