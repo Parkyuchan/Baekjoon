@@ -1,24 +1,16 @@
+import java.util.*;
 class Solution {
+    List<String> list = new ArrayList<>();
     public int solution(String word) {
-        int answer = 0;
-        int max = 0;
-
-        for (int i = 1; i <= 5; i++)
-            max += Math.pow(5, i);
-
-        for (int i = 1; i <= word.length(); i++) {
-            if (word.charAt(i - 1) == 'A') {
-                answer += 1;
-            } else if (word.charAt(i - 1) == 'E') {
-                answer += ((max / Math.pow(5, i)) * 1) + 1;
-            } else if (word.charAt(i - 1) == 'I') {
-                answer += ((max / Math.pow(5, i)) * 2) + 1;
-            } else if (word.charAt(i - 1) == 'O') {
-                answer += ((max / Math.pow(5, i)) * 3) + 1;
-            } else if (word.charAt(i - 1) == 'U') {
-                answer += ((max / Math.pow(5, i)) * 4) + 1;
-            }
+        dfs("", 0);
+        return list.indexOf(word);
+    }
+    
+    private void dfs(String word, int len) {
+        if (len > 5) return;
+        list.add(word);
+        for (int i = 0; i < 5; i++) {
+            dfs(word + "AEIOU".charAt(i), len + 1);
         }
-        return answer;
     }
 }
