@@ -3,26 +3,22 @@ import java.util.*;
 class Solution {
     public int solution(int[] scoville, int K) {
         int answer = 0;
-        PriorityQueue<Integer> heap = new PriorityQueue<>();
-
-        for (int num : scoville)
-            heap.add(num);
-
-        while(true) {
-            
-            int minFirst = heap.poll();
-            if (minFirst >= K)
-                break;
-            
-            if (heap.isEmpty()) {
-                answer = -1;
-                break;
+        PriorityQueue<Integer> que = new PriorityQueue<>();
+        
+        for (int i = 0; i < scoville.length; i++) {
+            que.offer(scoville[i]);
+        }
+        
+        while(que.peek() < K) {
+            if (que.size() < 2) {
+                return -1;
             }
             
-            int minSecond = heap.poll();
+            int a = que.poll();
+            int b = que.poll();
 
-            int newScroville = minFirst + (minSecond * 2);
-            heap.add(newScroville);
+            int result = a + (b * 2);
+            que.offer(result);
             answer++;
         }
         
